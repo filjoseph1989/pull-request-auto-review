@@ -9,3 +9,5 @@ logs/
 repos/
 work/
 __pycache__/
+lock/
+PAUSE
