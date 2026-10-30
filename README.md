@@ -24,7 +24,18 @@ Claude runs with read-only tools (`Read`, `Grep`, `Glob`, and `git log/show/diff
 
 | Path | Purpose |
 | --- | --- |
-| `auto-review.py` | The job |
+| `auto-review.py` | Entry point; calls `autoreview.cli.main` |
+| `autoreview/cli.py` | One cycle: candidates, change detection, dispatch to a pass |
+| `autoreview/passes.py` | The review pass and the recheck pass |
+| `autoreview/gates.py` | Whether a PR may be approved now, later, or not at all |
+| `autoreview/payloads.py` | Review/approval bodies and inline-comment placement (pure, no I/O) |
+| `autoreview/posting.py` | Saves drafts and posts what `mode` allows |
+| `autoreview/github.py` | All `gh` calls: search, PR data, threads, checks, posting |
+| `autoreview/claude.py` | Prompt loading and the read-only `claude -p` run |
+| `autoreview/workspace.py` | PR checkouts, the `ctx/` files, rubric and Jira ticket |
+| `autoreview/state.py` | `state.json` and the run lock |
+| `autoreview/config.py` | Paths, constants, `config.toml`, my GitHub login |
+| `autoreview/util.py` | Logging, subprocesses, notifications |
 | `run.sh` | launchd entry point; sets `PATH` and sources `env` |
 | `com.fil.auto-review.plist` | launchd agent definition (every 600 s, and at load) |
 | `config.toml` | Mode, repos, model, budgets and limits |
