@@ -3,9 +3,13 @@
 # "dry-run"      — nothing is posted; every review, reply and approval is written to drafts/.
 # "comment-only" — reviews, thread replies and resolves are posted; approvals go to drafts/ + a notification.
 # "live"         — approvals are posted too.
-mode = "live"
+# mode = "live"
+mode = "dry-run"
 
-repos = ["geekeeasia/value-chain-v2", "geekeeasia/value-chain-api-v2"]
+repos = [
+  "geekeeasia/value-chain-v2", 
+  "geekeeasia/value-chain-api-v2"
+]
 
 # Review rubric, read fresh on every run so edits to the prompts take effect.
 prompt_files = [
