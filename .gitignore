@@ -1,0 +1,11 @@
+# Secrets
+env
+
+# Runtime state and outputs
+state.json
+drafts/
+ctx/
+logs/
+repos/
+work/
+__pycache__/

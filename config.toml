@@ -1,0 +1,23 @@
+# Local auto-review settings. See /Users/fil/Fil/value-chain-project/docs/auto-review-plan.md.
+
+# "dry-run"      — nothing is posted; every review, reply and approval is written to drafts/.
+# "comment-only" — reviews, thread replies and resolves are posted; approvals go to drafts/ + a notification.
+# "live"         — approvals are posted too.
+mode = "live"
+
+repos = ["geekeeasia/value-chain-v2", "geekeeasia/value-chain-api-v2"]
+
+# Review rubric, read fresh on every run so edits to the prompts take effect.
+prompt_files = [
+  "/Users/fil/Fil/value-chain-project/docs/prompts/prompt-component/prompt-review-pull-request.md",
+  "/Users/fil/Fil/value-chain-project/docs/prompts/prompt-component/prompt-common-rules.md",
+  "/Users/fil/Fil/value-chain-project/docs/prompts/prompt-v2-value-chain.test.md",
+]
+
+model = "opus"
+max_budget_usd = 5.0       # per Claude run
+claude_timeout_s = 1800
+max_prs_per_run = 3
+max_rounds = 3             # past this the job stops acting on the PR and notifies
+max_changed_lines = 1500   # bigger PRs are reviewed, never approved
+review_prefix = "🤖 AI-assisted review"

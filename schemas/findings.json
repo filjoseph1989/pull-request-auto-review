@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "required": ["summary", "ticket_coverage", "findings"],
+  "properties": {
+    "summary": { "type": "string", "description": "Two to four sentences: what the PR does and the overall verdict." },
+    "ticket_coverage": { "type": "string", "description": "Which acceptance criteria are met, and anything in the ticket the PR does not cover." },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "line", "severity", "pre_existing", "title", "body"],
+        "properties": {
+          "id": { "type": "string" },
+          "path": { "type": "string", "description": "Repo-relative path in the PR head." },
+          "line": { "type": "integer", "description": "Line number in the PR head version of the file (RIGHT side)." },
+          "severity": { "type": "string", "enum": ["must-fix", "should-fix", "minor"] },
+          "pre_existing": { "type": "boolean", "description": "True when the problem existed before this PR and the PR only extends it." },
+          "title": { "type": "string" },
+          "body": { "type": "string", "description": "The comment as it will be posted: the defect, a concrete failure scenario, and the suggested fix." }
+        }
+      }
+    }
+  }
+}

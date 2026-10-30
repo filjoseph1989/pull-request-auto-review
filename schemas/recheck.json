@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "required": ["threads", "new_findings", "summary"],
+  "properties": {
+    "summary": { "type": "string" },
+    "threads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["thread", "verdict", "reply"],
+        "properties": {
+          "thread": { "type": "string", "description": "The thread key from threads.json, e.g. T1." },
+          "verdict": { "type": "string", "enum": ["addressed", "not_addressed", "pushback_accepted", "needs_human"] },
+          "reply": { "type": "string", "description": "What to post in the thread: the verdict and the evidence (file:line or commit)." }
+        }
+      }
+    },
+    "new_findings": {
+      "type": "array",
+      "description": "Problems introduced by the changes since the last review only.",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "line", "severity", "pre_existing", "title", "body"],
+        "properties": {
+          "id": { "type": "string" },
+          "path": { "type": "string" },
+          "line": { "type": "integer" },
+          "severity": { "type": "string", "enum": ["must-fix", "should-fix", "minor"] },
+          "pre_existing": { "type": "boolean" },
+          "title": { "type": "string" },
+          "body": { "type": "string" }
+        }
+      }
+    }
+  }
+}
