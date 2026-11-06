@@ -17,7 +17,7 @@ Every 10 minutes launchd runs `run.sh`, which loads `env` and runs one cycle of 
    - New problems in the changes are always posted as new findings.
 5. **Approve** when no blocking (`must-fix`/`should-fix`) threads remain and the gates pass: not a draft, under `max_changed_lines`, and no merge conflicts. With `wait_for_checks = true` the CI checks must be green too; with `false` (the current setting) it approves as soon as every concern is addressed, without waiting for tests. Pending mergeability (or pending checks, when waiting for them) means it tries again next cycle.
 
-After `max_rounds` rounds the job stops acting on a PR and sends a macOS notification. It also notifies on errors, on `needs_human` threads, and when an approval is ready (in `comment-only` mode) or posted.
+After `max_rounds` rounds the job stops acting on a PR and sends one macOS notification (only once per PR, however often the PR changes afterwards). It also notifies on errors, on `needs_human` threads, and when an approval is ready (in `comment-only` mode) or posted.
 
 Claude runs with read-only tools (`Read`, `Grep`, `Glob`, and `git log/show/diff/blame`). PR content is treated as untrusted input in both prompts.
 
@@ -122,7 +122,7 @@ Main knobs in `config.toml`:
 | `mode` | `dry-run`, `comment-only` or `live` (below) |
 | `repos` | Only PRs in these repos are reviewed |
 | `wait_for_checks` | `true`: hold approval until CI checks pass. `false`: approve once every concern is addressed |
-| `max_rounds` | Past this many rounds the job stops and notifies |
+| `max_rounds` | Past this many rounds the job stops and notifies once |
 | `max_changed_lines` | Bigger PRs are reviewed but never approved |
 | `max_prs_per_run` | PRs processed per 10-minute cycle |
 | `review_label` | The "(with AI help)" text in review headers and replies |
