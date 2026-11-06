@@ -55,7 +55,10 @@ def recheck_pass(key: str, pr: dict, entry: dict, last_sha: str, threads: list[d
     repo, number = key.split("#")
     round_no = entry.get("round", 1) + 1
     if round_no > CONFIG["max_rounds"]:
-        notify("needs you", f"{key} passed {CONFIG['max_rounds']} rounds; not acting")
+        # Alert once per PR; later changes on it would otherwise repeat the same alert every cycle.
+        if not entry.get("max_rounds_notified"):
+            notify("needs you", f"{key} passed {CONFIG['max_rounds']} rounds; not acting")
+            entry["max_rounds_notified"] = True
         return
 
     keyed = {f"T{i + 1}": t for i, t in enumerate(threads)}
