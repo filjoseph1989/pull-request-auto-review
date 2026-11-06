@@ -60,6 +60,7 @@ def main() -> int:
     if sys.argv[1:2] == ["status"]:
         from .report import main as report
         return report()
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--pr", help="OWNER/REPO#N: process just this PR")
     parser.add_argument("--force", action="store_true", help="ignore the saved state for --pr")
